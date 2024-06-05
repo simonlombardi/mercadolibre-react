@@ -1,25 +1,33 @@
 import NavBar from '../components/NavBar'
 import FetchData from '../components/FetchData'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 function Home() {
+	const [inputUser, setInputUser] = useState(null)
 
-	//no dar bola a este use effect que no anda todavía :P
+	const getInputUser = (inputUser) => {
+		setInputUser(inputUser)
+	}
+
 	useEffect(() => {
-		const getData = async () => {
+		if (inputUser == null || inputUser == "") {
+		}
+		else{
+			const getData = async () => {
 			try {
-				const dataPrueba = await FetchData("https://api.mercadolibre.com/sites/MLA/search?q=prueba/");
-				console.log(dataPrueba)
+				const response = await FetchData(`https://api.mercadolibre.com/sites/MLA/search?q=${inputUser}/`);
+				console.log(response);
 			} catch (error) {
 				console.error('Error al obtener los datos:', error);
 			}
 		}
 		getData();
-	}, []);
+		}
+	}, [inputUser]);
 
 	return (
 		<>
 			<div className='flex justify-center'>
-				<NavBar />
+				<NavBar getInputUser={getInputUser} />
 			</div>
 		</>
 	)
