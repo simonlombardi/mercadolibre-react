@@ -1,5 +1,5 @@
 import { useState } from "react"
-import Carrito from "./svgs/Carrito"
+import IconoCarrito from "./svgs/IconoCarrito"
 import Lupa from "./svgs/Lupa"
 
 const NavBar = ({ getInputUser }) => {
@@ -32,7 +32,9 @@ const NavBar = ({ getInputUser }) => {
         </a>
       </div>
       <div>
-        <Carrito />
+        <a href="/carrito">
+          <IconoCarrito />
+        </a>
       </div>
     </div>
   )

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Home from './pages/Home';
+import Carrito from './pages/Carrito'
 import './index.css'
 import {
   createBrowserRouter,
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home />,
   },
+  {
+    path: "/carrito",
+    element: <Carrito />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
