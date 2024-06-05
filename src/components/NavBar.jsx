@@ -30,7 +30,7 @@ const NavBar = ({ getInputUser }) => {
         </a>
       </div>
       <div className="my-2 sm:my-0 w-5/6 lg:w-1/2 sm:w-1/3 ">
-        <form action="" className={`flex items-center py-2 bg-white border-1 rounded-sm h-10 shadow-md  ${isFocused ? ' outline outline-1 outline-blue-500' : ''}`}>
+        <form action="" onSubmit={handleSubmit} className={`flex items-center py-2 bg-white border-1 rounded-sm h-10 shadow-md  ${isFocused ? ' outline outline-1 outline-blue-500' : ''}`}>
           <input type="text" required
             className="w-full pl-3 placeholder-gray-300 focus:outline-none"
             placeholder="Buscar productos, marcas y más..."

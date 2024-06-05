@@ -1,7 +1,7 @@
 
-const FetchData = async (endpoint) => {
+const FetchData = async (url) => {
 	try {
-		let respuesta = await fetch(endpoint)
+		let respuesta = await fetch(url)
 		let json = await respuesta.json();
 		return json
 
