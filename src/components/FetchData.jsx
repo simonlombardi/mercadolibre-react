@@ -10,3 +10,5 @@ const FetchData = async (endpoint) => {
 		throw error;
 	}
 };
+
+export default FetchData

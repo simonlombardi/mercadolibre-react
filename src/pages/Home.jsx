@@ -1,5 +1,6 @@
 import NavBar from '../components/NavBar'
 import FetchData from '../components/FetchData'
+import { useEffect } from 'react';
 function Home() {
 
 	//no dar bola a este use effect que no anda todavía :P
