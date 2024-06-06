@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     element: <Carrito />
   },
   {
-    path: "/404",
+    path: "*",
     element: <Error />
   }
 ]);
