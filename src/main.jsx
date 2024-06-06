@@ -2,11 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Home from './pages/Home';
 import Carrito from './pages/Carrito'
+import Error from './pages/404';
 import './index.css'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: "/carrito",
     element: <Carrito />
+  },
+  {
+    path: "/404",
+    element: <Error />
   }
 ]);
 
