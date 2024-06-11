@@ -2,6 +2,7 @@ import NavBar from '../components/NavBar'
 import FetchData from '../components/FetchData'
 import ProductCard from '../components/ProductCard';
 import { useEffect, useState } from 'react';
+import Arrow from '../components/svgs/Arrow';
 
 function Home() {
 	const [inputUser, setInputUser] = useState('boca'),
@@ -26,11 +27,11 @@ function Home() {
 	const handleOffset = (isForward, jumps) => {
 		if (isForward) {
 			setOffset(offset + jumps)
-			setContadorPagina(contadorPagina+1)
+			setContadorPagina(contadorPagina + 1)
 		} else {
 			contadorPagina > 1 ? setOffset(offset - jumps) : setOffset(0)
-			contadorPagina > 1 ? setContadorPagina(contadorPagina-1) : setContadorPagina(1)
-			
+			contadorPagina > 1 ? setContadorPagina(contadorPagina - 1) : setContadorPagina(1)
+
 		}
 		location.hash = "#top"
 	}
@@ -72,17 +73,20 @@ function Home() {
 					<div className="flex flex-wrap  w-full justify-around py-3 container">
 						{data ? data.results.map((product) => (
 							<ProductCard key={product.id} product={product} />
-						)) : <div>cargando...</div>}
+						)) : <div className='h-screen'>cargando...</div>}
 					</div>
 
 				</div>
-				<div className='flex justify-center'>
-					<button onClick={() => handleOffset(false, (isSearch ? 15 : 5))} className=' rotate-180 pb-1'>⮞⮞⮞</button>
-					<h1>Productos de la página {contadorPagina}</h1>
-					<button onClick={() => handleOffset(true, (isSearch ? 15 : 5))}> ⮞⮞⮞ </button>
+				<div className='flex justify-center justify-center bg-[#ffe600] py-5'>
+					<div onClick={() => handleOffset(false, (isSearch ? 15 : 5))} className=' cursor-pointer rotate-180 my-auto'>
+						<Arrow />
+					</div>
+					<h1 className='mx-2'>Productos de la página {contadorPagina}</h1>
+					<div onClick={() => handleOffset(true, (isSearch ? 15 : 5))} className=' cursor-pointer my-auto '>
+						<Arrow />
+					</div>
 				</div>
 			</div>
-
 		</>
 	)
 }
