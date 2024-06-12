@@ -2,6 +2,7 @@ import NavBar from '../components/NavBar'
 import FetchData from '../components/FetchData'
 import ProductCard from '../components/ProductCard';
 import { useEffect, useState } from 'react';
+import Spinner from '../components/Spinner';
 
 function Home() {
 	const [inputUser, setInputUser] = useState('boca')
@@ -48,7 +49,7 @@ function Home() {
 				<div className="flex flex-wrap  w-full justify-around py-3 container">
 					{data ? data.results.map((product) => (
 						<ProductCard key={product.id} product={product} />
-					)) : <div>cargando...</div>}
+					)) : <Spinner />}
 				</div>
 			</div>
 		</>
