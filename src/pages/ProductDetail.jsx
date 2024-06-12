@@ -26,9 +26,20 @@ console.log(data);
     return(
         <>
             <NavBar />
-            <div>
-                <h1>{data ? data.title : "cargando..."}</h1>
+            {!data ? <h1>cargando...</h1> : 
+            <div className="w-screen flex justify-center items-center flex-row">
+                <div className="w-10/12 flex flex-row">
+                    <div className="w-10/12">
+                        <img className="w-full" src={data.pictures[0].url} alt={`${data.title} imagen`} />
+                    </div>
+                    <div className="flex text-left w-6/12 border rounded border-gray-300 flex-col">
+                        <h1 className="text-2xl font-bold">{data.title}</h1>
+                        <h2 className="text-2xl font-light">${data.price}</h2>    
+                    </div>
+                </div>
             </div>
+            }
+            
         </>
     )
 }
