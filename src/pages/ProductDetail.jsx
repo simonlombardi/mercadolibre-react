@@ -78,7 +78,7 @@ const ProductDetail = () => {
                                 <p className="text-md text-[#5386D3] inline m-0 p-0">Devolución gratis. </p>
                                 <p className="text-[#929292] inline font-light">Tenés 30 días desde que lo recibís.</p>
                             </div>
-                            {data.warranty.includes(":") ?
+                            {data.warranty?.includes(":") ?
                                 <div className="block">
                                     <p className="text-md text-[#5386D3] inline m-0 p-0">{data.warranty.substring(0, data.warranty.indexOf(":") + 1)}</p>
                                     <p className="text-[#929292] inline font-light">{data.warranty.substring(data.warranty.indexOf(":") + 1)}</p>
