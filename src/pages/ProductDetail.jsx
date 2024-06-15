@@ -7,12 +7,14 @@ import Select from "../components/Select"
 import getInputUser from "../pages/Home"
 
 const ProductDetail = () => {
+    
     const { id } = useParams(),
         [data, setData] = useState(null),
         [principalImg, setPrincipalImg] = useState(null),
         [description, setDescription] = useState(null),
-        [quantity, setQuantity] = useState(0)
-
+        [quantity, setQuantity] = useState(0),
+        [cartProducts, setCartProducts] = useState([])
+        
     const getData = async () => {
         try {
             const response = await FetchData(`https://api.mercadolibre.com/items/${id}`)
@@ -38,17 +40,28 @@ const ProductDetail = () => {
     }
 
     const getQuantity = (selectQuantity) => {
-        setQuantity(selectQuantity)
+        setQuantity(parseInt(selectQuantity))
     }
 
     const handleImage = (e) => {
         setPrincipalImg(e.target.src)
     }
 
+    const addToCart = () => {
+        data.selected_quantity = quantity
+        setCartProducts([...cartProducts, data])
+        saveLocalStorage()
+    }
+
+    const saveLocalStorage = () => {
+        localStorage.setItem("cartProducts", JSON.stringify(cartProducts))
+    }
+
     useEffect(() => {
         getData()
         getDescription()
     }, [])
+
 
     return (
         <>
@@ -77,7 +90,7 @@ const ProductDetail = () => {
                             </div>
                             <h4 className="font-bold">{(data.initial_quantity) > 0 ? `Stock disponible (${data.initial_quantity})` : "No hay stock"}</h4>
                             <Select getQuantity = {getQuantity}/>
-                            <button onClick={()=>console.log(data, quantity)} class="bg-blue-500 h-12 w-full px-2 hover:bg-blue-700 text-white self-center rounded">
+                            <button onClick={addToCart} className="bg-blue-500 h-12 w-full px-2 hover:bg-blue-700 text-white self-center rounded">
                                 Agregar al carrito
                             </button>
                             <div className="block">
