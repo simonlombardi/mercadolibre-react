@@ -7,14 +7,15 @@ import Select from "../components/Select"
 import getInputUser from "../pages/Home"
 
 const ProductDetail = () => {
-    
+
     const { id } = useParams(),
         [data, setData] = useState(null),
         [principalImg, setPrincipalImg] = useState(null),
         [description, setDescription] = useState(null),
         [quantity, setQuantity] = useState(0),
-        [cartProducts, setCartProducts] = useState([])
-        
+        [cartProducts, setCartProducts] = useState(localStorage.getItem("cartProducts") ? JSON.parse(localStorage.getItem("cartProducts")) : []),
+        [isInCart, setIsInCart] = useState(false)
+
     const getData = async () => {
         try {
             const response = await FetchData(`https://api.mercadolibre.com/items/${id}`)
@@ -48,13 +49,16 @@ const ProductDetail = () => {
     }
 
     const addToCart = () => {
-        data.selected_quantity = quantity
-        setCartProducts([...cartProducts, data])
-        saveLocalStorage()
+        if (!isInCart) {
+            data.selected_quantity = quantity
+            setCartProducts([...cartProducts, data])
+        }
     }
 
-    const saveLocalStorage = () => {
-        localStorage.setItem("cartProducts", JSON.stringify(cartProducts))
+    const RemoveFromCart = () => {
+        if (isInCart) {
+            setCartProducts(cartProducts.filter((p) => { return p.id != id }))
+        }
     }
 
     useEffect(() => {
@@ -62,6 +66,11 @@ const ProductDetail = () => {
         getDescription()
     }, [])
 
+    useEffect(() => {
+        localStorage.setItem("cartProducts", JSON.stringify(cartProducts))
+        const cartIds = cartProducts.map((p) => p.id)
+        cartIds.includes(id) ? setIsInCart(true) : setIsInCart(false)
+    }, [cartProducts])
 
     return (
         <>
@@ -89,10 +98,18 @@ const ProductDetail = () => {
                                 <h2 className="text-2xl font-light ">${data.price}</h2>
                             </div>
                             <h4 className="font-bold">{(data.initial_quantity) > 0 ? `Stock disponible (${data.initial_quantity})` : "No hay stock"}</h4>
-                            <Select getQuantity = {getQuantity}/>
-                            <button onClick={addToCart} className="bg-blue-500 h-12 w-full px-2 hover:bg-blue-700 text-white self-center rounded">
-                                Agregar al carrito
-                            </button>
+                            <Select getQuantity={getQuantity} />
+                            {
+                                isInCart ?
+                                    <button onClick={RemoveFromCart} className="bg-red-500 h-12 w-full px-2 hover:bg-red-700 text-white self-center rounded">
+                                        Quitar del carrito
+                                    </button>
+                                    :
+                                    <button onClick={addToCart} className="bg-blue-500 h-12 w-full px-2 hover:bg-blue-700 text-white self-center rounded">
+                                        Agregar al carrito
+                                    </button>
+                            }
+
                             <div className="block">
                                 <p className="text-md text-[#5386D3] inline m-0 p-0">Devolución gratis. </p>
                                 <p className="text-[#929292] inline font-light">Tenés 30 días desde que lo recibís.</p>
