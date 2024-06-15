@@ -8,76 +8,91 @@ import Select from "../components/Select"
 
 const ProductDetail = () => {
     const { id } = useParams(),
-     [data, setData] = useState(null),
-     [principalImg, setPrincipalImg] = useState(null),
-     [description, setDescription] = useState(null)
+        [data, setData] = useState(null),
+        [principalImg, setPrincipalImg] = useState(null),
+        [description, setDescription] = useState(null)
 
     const getData = async () => {
-                try {
-                    const response = await FetchData(`https://api.mercadolibre.com/items/${id}`)
-                    console.log(response.pictures[0]);
-                    setData(response)
-                    setPrincipalImg(response.pictures[0].url)
-                } 
-                catch (error) {
-                    console.error(`Error al obtener el dato del producto ${id}:`, error)
-                }
-            }
+        try {
+            const response = await FetchData(`https://api.mercadolibre.com/items/${id}`)
+            setData(response)
+            console.log(response)
+            setPrincipalImg(response.pictures[0].url)
+        }
+        catch (error) {
+            console.error(`Error al obtener el dato del producto ${id}:`, error)
+        }
+    }
 
     const getDescription = async () => {
         try {
             const response = await FetchData(`https://api.mercadolibre.com/items/${id}/description`)
-            console.log(response);
             setDescription(response)
-        } 
+        }
         catch (error) {
             console.error(`Error al obtener el dato del producto ${id}:`, error)
         }
     }
 
     const handleImage = (e) => {
-        console.log(e.target.src);
         setPrincipalImg(e.target.src)
     }
+
     useEffect(() => {
         getData()
         getDescription()
     }, [])
 
-    return(
+    return (
         <>
             <NavBar />
-            {!data ? <Spinner /> : 
-            <div className="w-screen h-screen flex justify-center items-center flex-col flex-row bg-gray-300">
-                <div className="w-10/12 h-5/6 mt-5 flex flex-row bg-gray-50">
-                    <div className="w-10/12 flex justify-center">
-                        <img className="w-auto" src={principalImg} alt={`${data.title} imagen`} />
-                    </div>
-                    <div className="flex text-left w-6/12 border rounded border-gray-300 flex-col items-start justify-around gap-y-4">
-                        <h1 className="text-2xl font-bold pl-4 pt-4">{data.title}</h1>
-                        {data.original_price ? <h4 className="text-md line-through pl-4 font-light">${data.original_price}</h4> : <></>}
-                        <h2 className="text-2xl font-light pl-4 ">${data.price}</h2>
-                        <h4 className="text-md text-[#00a650] pl-4 font-medium">Devolución gratis</h4>
-                        <div className="flex w-5/6 flex-wrap justify-center gap-4">
+            {!data ? <Spinner /> :
+                <div className=" h-screen flex justify-center items-center flex-col bg-gray-300">
+                    <div className="w-10/12 overflow-y-auto mt-5 flex flex-col sm:flex-row flex-grow sm:flex-grow-0 bg-gray-50">
+                        <div className="flex sm:flex-col flex-row w-full sm:w-2/12 justify-center gap-4 p-4 ">
                             {data.pictures.slice(0, 6).map((picture, index) => {
-                                return <img src={picture.url} key={index} onMouseEnter={(e) => handleImage(e)} className="w-36 border-2 hover:scale-105 transition duration-500" alt="" />
+                                return (
+                                    <div key={index} className=" hover:border-blue-400 hover:border-4 border-2 rounded hover:scale-105 object-scale-down h-14 w-14 transition duration-500 flex justify-center">
+                                        <img src={picture.url} onMouseEnter={(e) => handleImage(e)} className="h-auto w-auto" alt="Selección de imagen del producto" />
+                                    </div>
+                                )
                             })}
                         </div>
-                        <h4 className="font-bold pl-4">{(data.initial_quantity) > 0 ? `Stock disponible (${data.initial_quantity})` : "No hay stock"}</h4>
-                        <Select />
-                        <button class="bg-blue-500 h-12 ml-4 hover:bg-blue-700 text-white px-3 self-center rounded">
-                            Agregar al carrito
-                        </button>
+                        <div className="flex justify-center w-full sm:w-6/12 p-4">
+                            <img className=" max-h-96 h-full max-w-96 my-auto " src={principalImg} alt={`${data.title} imagen`} />
+                        </div>
+                        <div className="sm:m-4 flex text-left w-full sm:w-4/12 md:border border-grey-700 p-4 flex-col items-start justify-around gap-y-4  rounded-md ">
+                            <h1 className="text-2xl font-bold pt-4">{data.title}</h1>
+                            {data.shipping.free_shipping ? <div className="text-[#31B771] font-semi-bold">Envío gratis.</div> : ''}
+                            <div>
+                                {data.original_price ? <div className="flex"><p className="text-md line-through font-light inline">${data.original_price}</p><p className="text-[#31B771] ml-2 text-xs">DESCUENTO</p> </div> : <></>}
+                                <h2 className="text-2xl font-light ">${data.price}</h2>
+                            </div>
 
+                            <h4 className="font-bold">{(data.initial_quantity) > 0 ? `Stock disponible (${data.initial_quantity})` : "No hay stock"}</h4>
+                            <Select />
+                            <button class="bg-blue-500 h-12 w-full px-2 hover:bg-blue-700 text-white self-center rounded">
+                                Agregar al carrito
+                            </button>
+                            <div className="block">
+                                <p className="text-md text-[#5386D3] inline m-0 p-0">Devolución gratis. </p>
+                                <p className="text-[#929292] inline font-light">Tenés 30 días desde que lo recibís.</p>
+                            </div>
+                            {data.warranty.includes(":") ?
+                                <div className="block">
+                                    <p className="text-md text-[#5386D3] inline m-0 p-0">{data.warranty.substring(0, data.warranty.indexOf(":") + 1)}</p>
+                                    <p className="text-[#929292] inline font-light">{data.warranty.substring(data.warranty.indexOf(":") + 1)}</p>
+                                </div>
+                                : <p className="text-[#929292] inline font-light">Este producto no ofrece garantía.</p>}
+                        </div>
                     </div>
+                    {!description ? <Spinner /> :
+                        <div className="w-10/12 mb-auto h-auto bg-[#ffffff] border-t p-4">
+                            <h1 className="font-bold text-lg">Descripcion del producto</h1>
+                            <p className="text-gray-800">{description.plain_text}</p>
+                        </div>
+                    }
                 </div>
-                {!description ? <Spinner /> : 
-                    <div className="w-10/12 bg-[#ffffff] border-t p-4">
-                        <h1 className="font-bold text-lg">Descripcion del producto</h1>
-                        <p className="text-gray-800">{description.plain_text}</p>
-                    </div>
-                }
-            </div>
             }
         </>
     )
