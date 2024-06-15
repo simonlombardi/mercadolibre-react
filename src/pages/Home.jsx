@@ -2,6 +2,7 @@ import NavBar from '../components/NavBar'
 import FetchData from '../components/FetchData'
 import ProductCard from '../components/ProductCard';
 import { useEffect, useState } from 'react';
+import Spinner from '../components/Spinner';
 import Arrow from '../components/svgs/Arrow';
 
 function Home() {
@@ -68,14 +69,14 @@ function Home() {
 						: ''}
 				</div>
 			</div>
+
 			<div className='bg-[#EDEDED] min-h-screen '>
 				<div className='flex justify-center'>
 					<div className="flex flex-wrap  w-full justify-around py-3 container">
 						{data ? data.results.map((product) => (
 							<ProductCard key={product.id} product={product} />
-						)) : <div className='h-screen'>cargando...</div>}
+						)) :  <Spinner />}
 					</div>
-
 				</div>
 				<div className='flex justify-center justify-center bg-[#ffe600] py-5'>
 					<div onClick={() => handleOffset(false, (isSearch ? 15 : 5))} className=' cursor-pointer rotate-180 my-auto'>

@@ -8,12 +8,17 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import ProductDetail from './pages/ProductDetail';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/product/:id",
+    element: <ProductDetail />
   },
   {
     path: "/carrito",
