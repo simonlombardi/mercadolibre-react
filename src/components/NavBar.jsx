@@ -1,6 +1,7 @@
 import { useState } from "react"
 import IconoCarrito from "./svgs/IconoCarrito"
 import Lupa from "./svgs/Lupa"
+import { Link } from "react-router-dom";
 
 const NavBar = ({ getInputUser }) => {
   const [input, setInput] = useState(null),
@@ -25,9 +26,9 @@ const NavBar = ({ getInputUser }) => {
   return (
     <div className="flex sm:flex-row items-center flex-col bg-[#ffe600] w-full justify-around py-3">
       <div>
-        <a href="/">
+        <Link to="/">
           <img src="/mercado-libre-logo-1.png" alt="mercadolibre logo" className="w-[110px]" />
-        </a>
+        </Link>
       </div>
       <div className="my-2 sm:my-0 w-5/6 lg:w-1/2 sm:w-1/3 ">
         <form action="" onSubmit={handleSubmit} className={`flex items-center py-2 bg-white border-1 rounded-sm h-10 shadow-md  ${isFocused ? ' outline outline-1 outline-blue-500' : ''}`}>
@@ -39,15 +40,15 @@ const NavBar = ({ getInputUser }) => {
               handleInput(e)
             }} />
           <p className="text-gray-300 mx-4">|</p>
-          <a href="" onClick={handleSubmit} className="mr-2">
+          <Link href="" onClick={handleSubmit} className="mr-2">
             <Lupa />
-          </a>
+          </Link>
         </form>
       </div>
       <div>
-        <a href="/carrito">
+        <Link to="/carrito">
           <IconoCarrito />
-        </a>
+        </Link>
       </div>
     </div>
   )
