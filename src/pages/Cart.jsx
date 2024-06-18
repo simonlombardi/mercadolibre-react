@@ -12,22 +12,44 @@ const Cart = () => {
     }
   }
 
+  const increaseQuantity = (product) => {
+    let cartProductsUpdate = cartProducts.map(p => {
+      if (p.id == product.id) {
+        return{...p, selected_quantity: product.selected_quantity + 1}
+      }
+      return p
+    })
+    setCartProducts(cartProductsUpdate)
+  }
+
+  const decreaseQuantity = (product) => {
+    let cartProductsUpdate = cartProducts.map(p => {
+      if (p.id == product.id) {
+        return{...p, selected_quantity: product.selected_quantity - 1}
+      }
+      return p
+    })
+    setCartProducts(cartProductsUpdate)
+  }
+
   return (
     <>
       <NavBar />
+      {(cartProducts.length == 0) ? <h1 className="text-center">El carrito esta vacio</h1> : 
       <div className="bg-[#EDEDED] h-fit flex justify-around px-28 py-11">
         <div className=" w-7/12 bg-white rounded">
-          render productoooos
+          productos
           <hr />
           {cartProducts.map((p) => (<div className="pt-2" key={p.id}>
-            <div className="flex h-28 flex-wrap">
+            <div className="flex h-28 justify-center items-center flex-wrap">
               <div className=" w-2/12  object-contain"> <img className="m-auto w-min-11 max-h-20 max-w-20" src={p.pictures[0].url} alt="" /></div>
               <p className="w-6/12 truncate">
                 {p.title}
               </p>
-              <div className=" text-center w-2/12">
-                CANTIDAD
-                <p>{p.selected_quantity}</p>
+              <div className="flex justify-center items-center text-center w-2/12">
+                <button onClick={() => decreaseQuantity(p)} className="bg-red-500 hover:bg-red-600 text-white flex justify-center items-center font-bold h-6 w-6">-</button>
+                <p className="mx-2">{p.selected_quantity}</p>
+                <button onClick={() => increaseQuantity(p)} className="bg-green-500 hover:bg-green-600 flex justify-center items-center text-white font-bold h-6 w-6">+</button>
               </div>
               <div className="w-2/12 text-center">
                 {/* PONER SI TIENE DESCUENTO */}
@@ -48,6 +70,8 @@ const Cart = () => {
         </div>
 
       </div>
+      }
+      
     </>
   )
 }
