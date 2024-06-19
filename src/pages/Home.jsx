@@ -26,7 +26,6 @@ function Home() {
 		const getData = async () => {
 			try {
 				const response = await FetchData(`https://api.mercadolibre.com/sites/MLA/search?q=Velez&limit=4&offset=${offset}`);
-				console.log(`https://api.mercadolibre.com/sites/MLA/search?q=Velez&limit=4&offset=${offset}`)
 				setData(response)
 			} catch (error) {
 				console.error('Error al obtener los datos:', error);
