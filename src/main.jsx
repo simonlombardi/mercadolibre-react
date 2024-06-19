@@ -9,12 +9,17 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ProductDetail from './pages/ProductDetail';
+import Results from './pages/Results';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/results/:terminoBusqueda",
+    element: <Results />
   },
   {
     path: "/product/:id",
