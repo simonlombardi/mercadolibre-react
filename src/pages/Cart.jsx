@@ -1,6 +1,7 @@
 import { useState } from "react"
 import NavBar from "../components/NavBar"
 import PucharseComplete from "../components/PucharseComplete"
+import EmptyCart from "../components/EmptyCart"
 
 const Cart = () => {
   const [cartProducts, setCartProducts] = useState(localStorage.getItem("cartProducts") ? JSON.parse(localStorage.getItem("cartProducts")) : []),
@@ -65,7 +66,7 @@ const Cart = () => {
       {pucharseComplete ? <PucharseComplete />  : 
       <>
         <NavBar />
-          {(cartProducts.length == 0) ? <> <div className="h-48 w-screen flex justify-center items-center"> <h1 className="text-lg">El carrito esta vacio</h1> </div> </>: 
+          {(cartProducts.length == 0) ? <EmptyCart />: 
           <div className="bg-[#EDEDED] h-fit flex justify-around px-28 py-11">
             <div className=" w-7/12 bg-white rounded">
               <div className="ml-5">
