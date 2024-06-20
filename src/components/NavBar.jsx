@@ -1,27 +1,29 @@
 import { useState } from "react"
 import IconoCarrito from "./svgs/IconoCarrito"
 import Lupa from "./svgs/Lupa"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const NavBar = ({ getInputUser }) => {
-  const [input, setInput] = useState(null),
+const NavBar = () => {
+  const navigate = useNavigate(),
+    [input, setInput] = useState(null),
     [isFocused, setIsFocused] = useState(false);
 
-  // agrego states para el outline de la barra de búsqueda
   const handleFocus = () => {
     setIsFocused(true);
   };
+
   const handleBlur = () => {
     setIsFocused(false);
   };
 
   const handleInput = (e) => {
     setInput(e.target.value)
-  }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    getInputUser(input)
-  }
+    navigate(`/results/${input}`)
+  };
 
   return (
     <div className="flex sm:flex-row items-center flex-col bg-[#ffe600] w-full justify-around py-3">
