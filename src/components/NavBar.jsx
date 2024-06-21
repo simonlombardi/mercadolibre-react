@@ -3,10 +3,11 @@ import IconoCarrito from "./svgs/IconoCarrito"
 import Lupa from "./svgs/Lupa"
 import { Link, useNavigate } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({cartProductsQuantity}) => {
   const navigate = useNavigate(),
     [input, setInput] = useState(null),
-    [isFocused, setIsFocused] = useState(false);
+    [isFocused, setIsFocused] = useState(false),
+    [cartProducts, setCartProducts] = useState(localStorage.getItem("cartProducts") ? JSON.parse(localStorage.getItem("cartProducts")) : []);
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -47,10 +48,11 @@ const NavBar = () => {
           </Link>
         </form>
       </div>
-      <div>
+      <div className="flex">
         <Link to="/carrito">
           <IconoCarrito />
         </Link>
+        <p className="pt-2.5">{cartProductsQuantity !== undefined ? cartProductsQuantity : cartProducts.length }</p>
       </div>
     </div>
   )

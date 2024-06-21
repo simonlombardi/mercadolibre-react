@@ -34,7 +34,6 @@ const Cart = () => {
     let cartProductsUpdate = cartProducts.map(p => {
       if (p.id == product.id) {
         if (product.selected_quantity == 1) {
-
         }
         else {
           return { ...p, selected_quantity: product.selected_quantity - 1 }
@@ -66,7 +65,7 @@ const Cart = () => {
     <>
       {purchaseComplete ? <PurchaseComplete /> :
         <>
-          <NavBar />
+          <NavBar cartProductsQuantity={cartProducts.length} />
           {(cartProducts.length == 0) ? <EmptyCart /> :
             <div className='bg-[#EDEDED] h-fit flex justify-around px-28 py-11'>
               {/* Productos */}
