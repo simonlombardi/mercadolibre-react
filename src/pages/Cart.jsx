@@ -11,7 +11,7 @@ const Cart = () => {
     if (cartProducts.length > 0) {
       let precios = cartProducts.map((p) => { return p.price * p.selected_quantity })
       const suma = precios.reduce((acumulador, valoractual) => acumulador + valoractual)
-      return suma.toFixed(2)
+      return suma
     }
   }
 
@@ -55,9 +55,9 @@ const Cart = () => {
   const purchaseFinish = () => {
     setPurchaseComplete(true)
     setCartProducts([])
+    localStorage.clear()
     setTimeout(() => {
       setPurchaseComplete(false)
-      localStorage.clear()
     }, 2500)
 
   }
@@ -94,9 +94,9 @@ const Cart = () => {
                           <button onClick={() => increaseQuantity(p)} className="bg-green-500 hover:bg-green-600 flex justify-center items-center text-white font-bold h-6 w-6">+</button>
                         </div>
                         <div className="w-2/12 text-center">
-                          {p.original_price ? <div className="flex justify-center"> <p className="text-md line-through font-light inline pr-2">${p.original_price}</p> <p className="text-[#31B771]">-{Math.round(100 - (p.price * 100 / p.original_price))}% OFF</p></div> : ''}
-                          <p className="font-thin text-xl">${(p.price.toFixed(2))}</p>
-                          {p.selected_quantity > 1 ? <p className="font-thin inline">Total: ${(p.price * p.selected_quantity).toFixed(2)}</p> : ''}
+                          {p.original_price ? <div className="flex justify-center"> <p className="text-md line-through font-light inline pr-2">${p.original_price.toLocaleString('es-AR')}</p> <p className="text-[#31B771]">-{Math.round(100 - (p.price * 100 / p.original_price))}% OFF</p></div> : ''}
+                          <p className="font-thin text-xl">${(p.price.toLocaleString('es-AR'))}</p>
+                          {p.selected_quantity > 1 ? <p className="font-thin inline">Total: ${(p.price * p.selected_quantity).toLocaleString('es-AR')}</p> : ''}
 
                         </div>
                       </div>
@@ -114,10 +114,10 @@ const Cart = () => {
                 <hr />
                 <div className="flex justify-between px-4 py-4">
                   <p className="font-bold text-lg">Total:</p>
-                  <p className="font-bold">${getTotal()}</p>
+                  <p className="font-bold text-3xl">${getTotal().toLocaleString('es-AR')}</p>
                 </div>
                 <div className="w-full flex justify-center">
-                  <button onClick={purchaseFinish} className="bg-blue-500 h-12 w-7/12 px-2 hover:bg-blue-700 text-white self-center rounded">
+                  <button onClick={purchaseFinish} className="bg-blue-500 m-2 h-12 w-7/12 px-2 hover:bg-blue-700 text-white self-center rounded">
                     Finalizar compra
                   </button>
                 </div>
