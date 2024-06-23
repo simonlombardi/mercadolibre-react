@@ -17,7 +17,6 @@ function Home() {
 		} else {
 			contadorPagina > 1 ? setOffset(offset - jumps) : setOffset(0)
 			contadorPagina > 1 ? setContadorPagina(contadorPagina - 1) : setContadorPagina(1)
-
 		}
 		location.hash = "#top"
 	}

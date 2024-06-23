@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import FetchData from "../components/FetchData"
 import NavBar from "../components/NavBar"
 import Spinner from "../components/Spinner"
@@ -9,12 +9,14 @@ import getInputUser from "../pages/Home"
 const ProductDetail = () => {
 
     const { id } = useParams(),
+        navigate = useNavigate(),
         [data, setData] = useState(null),
         [principalImg, setPrincipalImg] = useState(null),
         [description, setDescription] = useState(null),
         [quantity, setQuantity] = useState(0),
         [cartProducts, setCartProducts] = useState(localStorage.getItem("cartProducts") ? JSON.parse(localStorage.getItem("cartProducts")) : []),
-        [isInCart, setIsInCart] = useState(false)
+        [isInCart, setIsInCart] = useState(false);
+
 
     const getData = async () => {
         try {
@@ -26,7 +28,8 @@ const ProductDetail = () => {
             setPrincipalImg(response.pictures[0].url)
         }
         catch (error) {
-            console.error(`Error al obtener el dato del producto ${id}:`, error)
+            navigate("/404")
+            console.error(`Error al obtener los datos del producto ${id}:`, error)
         }
     }
 
@@ -36,7 +39,7 @@ const ProductDetail = () => {
             setDescription(response)
         }
         catch (error) {
-            console.error(`Error al obtener el dato del producto ${id}:`, error)
+            console.error(`Error al obtener la descripción del producto ${id}:`, error)
         }
     }
 
