@@ -125,7 +125,7 @@ const ProductDetail = () => {
                         </div>
                     </div>
                     {!description ? <Spinner /> :
-                        <div className="w-10/12 mb-auto h-auto bg-[#ffffff] border-t p-4">
+                        <div className="w-10/12 mb-4 h-1/4 overflow-scroll lg:h-10/12 bg-[#ffffff] border-t p-4">
                             <h1 className="font-bold text-lg">Descripcion del producto</h1>
                             <p className="text-gray-800">{description.plain_text}</p>
                         </div>

@@ -67,9 +67,9 @@ const Cart = () => {
         <>
           <NavBar cartProductsQuantity={cartProducts.length} />
           {(cartProducts.length == 0) ? <EmptyCart /> :
-            <div className='bg-[#EDEDED] h-fit flex justify-around px-28 py-11'>
+            <div className='bg-[#EDEDED] h-fit flex flex-col xl:flex-row justify-around xl:px-28 xl:py-11'>
               {/* Productos */}
-              <div className=" w-7/12 bg-white rounded">
+              <div className="w-screen xl:w-7/12 bg-white rounded">
                 <div className="ml-5 py-3">
                   <p className="font-bold text-xl">Productos ({cartProducts.length})</p>
                 </div>
@@ -81,20 +81,20 @@ const Cart = () => {
                     <div className="pt-2 z-10" key={p.id}>
                       <div className="flex h-28 justify-center items-center flex-wrap">
                         <div className=" w-2/12  object-contain"> <img className="m-auto w-min-11 max-h-20 max-w-20" src={p.pictures[0].url} alt="" /></div>
-                        <div className="flex w-6/12 flex-col items-start">
-                          <p className="w-10/12">
+                        <div className="flex w-2/6 truncate flex-col items-start">
+                          <p className="w-7/12 md:text-md">
                             {p.title}
                           </p>
                           <button onClick={() => deleteProduct(p)} className="font-semibold text-[#3483fa] hover:underline">Eliminar</button>
                         </div>
-                        <div className="flex justify-center items-center text-center w-2/12">
+                        <div className="flex justify-center items-center text-center w-2/12 ml-4">
                           <button onClick={() => decreaseQuantity(p)} className="bg-red-500 hover:bg-red-600 text-white flex justify-center items-center font-bold h-6 w-6">-</button>
                           <p className="mx-2">{p.selected_quantity}</p>
                           <button onClick={() => increaseQuantity(p)} className="bg-green-500 hover:bg-green-600 flex justify-center items-center text-white font-bold h-6 w-6">+</button>
                         </div>
                         <div className="w-2/12 text-center">
                           {p.original_price ? <div className="flex justify-center"> <p className="text-md line-through font-light inline pr-2">${p.original_price.toLocaleString('es-AR')}</p> <p className="text-[#31B771]">-{Math.round(100 - (p.price * 100 / p.original_price))}% OFF</p></div> : ''}
-                          <p className="font-thin text-xl">${(p.price.toLocaleString('es-AR'))}</p>
+                          <p className="font-thin md:text-xl">${(p.price.toLocaleString('es-AR'))}</p>
                           {p.selected_quantity > 1 ? <p className="font-thin inline">Total: ${(p.price * p.selected_quantity).toLocaleString('es-AR')}</p> : ''}
 
                         </div>
@@ -106,7 +106,7 @@ const Cart = () => {
 
               </div>
               {/* Resumen y checkout */}
-              <div className="w-4/12 bg-white rounded">
+              <div className="w-screen xl:w-4/12 bg-white rounded">
                 <div className="ml-5 py-3">
                   <p className="font-bold text-xl">Resumen de Compra</p>
                 </div>
