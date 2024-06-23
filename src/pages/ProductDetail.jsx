@@ -4,7 +4,6 @@ import FetchData from "../components/FetchData"
 import NavBar from "../components/NavBar"
 import Spinner from "../components/Spinner"
 import Select from "../components/Select"
-import getInputUser from "../pages/Home"
 
 const ProductDetail = () => {
 
@@ -77,7 +76,7 @@ const ProductDetail = () => {
 
     return (
         <>
-            <NavBar getInputUser={getInputUser} />
+            <NavBar cartProductsQuantity={cartProducts.length} />
             {!data ? <Spinner /> :
                 <div className=" h-screen flex justify-center items-center flex-col bg-gray-300">
                     <div className="w-10/12 overflow-y-auto mt-5 flex flex-col sm:flex-row flex-grow sm:flex-grow-0 bg-gray-50">
