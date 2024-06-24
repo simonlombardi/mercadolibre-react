@@ -1,8 +1,24 @@
-# React + Vite
+# Challenge Mercado Libre - ReactJs
+Este proyecto de la materia Programacion III, consiste en recrear el sitio web de Mercado Libre utilizando React Js y Tailwind CSS.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Funcionalidades
+-Busqueda de productos.
+-Ordenamiento por precios (mayor y menor) y relevancia.
+-Posibilidad de agregar elementos al carrito.
+-Posibilidad de aumentar o disminuir la cantidad del producto.
+-Comportamiento adaptativo para los distintos dispositivos (diseño responsive).
 
-Currently, two official plugins are available:
+### Alumnos:
+-Facundo Lemo
+https://github.com/FacuLemo
+-Simon Lombardi
+https://github.com/simonlombardi
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+### Correr la aplicacion
+Para clonar y levantar el repositorio, seguir los siguientes pasos:
+
+1. En la terminal escribir: `git clone` https://github.com/simonlombardi/mercadolibre-react.git.
+2. Instalar las dependencias en el directorio del proyecto con: `npm install`.
+3. Correr la aplicacion con: `npm run dev`.
+4. En la terminar aparecera la direccion donde estara corriendo en el navegador.
