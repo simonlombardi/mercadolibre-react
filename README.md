@@ -18,16 +18,16 @@ Para clonar y levantar el repositorio, deberás seguir los siguientes pasos:
 
 ### Alumnos
 - [Facundo Esteban Lemo](https://github.com/FacuLemo)
-- [Simon Lombardi](https://github.com/simonlombardi)
+- [Simón Lombardi](https://github.com/simonlombardi)
 
 
 # Capturas
 ### Pantalla inicial
 ![imagenHome](https://github.com/simonlombardi/mercadolibre-react/assets/93365238/d1ec53c7-9431-45ee-861f-9b4880e24cd1)
-### Resultado de búsqueda, mobile
-![imagenResultsMobile](https://github.com/simonlombardi/mercadolibre-react/assets/93365238/5b970c26-70e3-490f-9574-7cb44f180ac5)
+### Resultado de búsqueda (vista mobile)
+![GifResultadosMobile](https://github.com/simonlombardi/mercadolibre-react/assets/93365238/c812a89e-0b92-4f5f-8fc7-ceb53d9d89d1)
 ### Vista de un producto
-![imagenProducto](https://github.com/simonlombardi/mercadolibre-react/assets/93365238/28111e0e-129f-4094-81d8-818a03df5016)
+![imagenProducto](https://github.com/simonlombardi/mercadolibre-react/assets/93365238/b67cd924-a468-4bc9-bfa9-e5a713106f39)
 ### Vista del carrito
 ![imagenCarrito](https://github.com/simonlombardi/mercadolibre-react/assets/93365238/e6298952-2544-4c6f-8904-5cc0f4b0d9a8)
 ### Finalizar compra
