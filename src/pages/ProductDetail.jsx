@@ -92,8 +92,8 @@ const ProductDetail = () => {
                         <div className="flex justify-center w-full sm:w-6/12 p-4">
                             <img className=" max-h-96 h-full max-w-96 my-auto " src={principalImg} alt={`${data.title} imagen`} />
                         </div>
-                        <div className="sm:m-4 flex text-left w-full sm:w-4/12 md:border border-grey-700 p-4 flex-col items-start justify-around gap-y-4  rounded-md ">
-                            <h1 className="text-2xl font-bold pt-4">{data.title}</h1>
+                        <div className="sm:m-4 flex text-left w-full sm:w-4/12 sm:border border-grey-700 p-4 flex-col gap-y-4 rounded-md sm:overflow-auto ">
+                            <p className="text-2xl shrink-0 font-bold ">{data.title}</p>
                             {data.shipping.free_shipping ? <div className="text-[#31B771] font-semi-bold">Envío gratis.</div> : ''}
                             <div>
                                 {data.original_price ? <div className="flex"><p className="text-md line-through font-light inline">${data.original_price}</p><p className="text-[#31B771] ml-2 text-xs">DESCUENTO</p> </div> : <></>}
@@ -103,11 +103,11 @@ const ProductDetail = () => {
                             <Select getQuantity={getQuantity} />
                             {
                                 isInCart ?
-                                    <button onClick={RemoveFromCart} className="bg-red-500 h-12 w-full px-2 hover:bg-red-700 text-white self-center rounded">
+                                    <button onClick={RemoveFromCart} className="bg-red-500 min-h-12 w-full px-2 hover:bg-red-700 text-white self-center rounded">
                                         Quitar del carrito
                                     </button>
                                     :
-                                    <button onClick={addToCart} className="bg-blue-500 h-12 w-full px-2 hover:bg-blue-700 text-white self-center rounded">
+                                    <button onClick={addToCart} className="bg-blue-500 min-h-12 w-full px-2 hover:bg-blue-700 text-white self-center rounded">
                                         Agregar al carrito
                                     </button>
                             }
@@ -126,7 +126,7 @@ const ProductDetail = () => {
                     </div>
                     {!description ? <Spinner /> :
                         <div className="w-10/12 mb-4 h-1/4 overflow-scroll lg:h-10/12 bg-[#ffffff] border-t p-4">
-                            <h1 className="font-bold text-lg">Descripcion del producto</h1>
+                            <h1 className="font-bold text-lg">Descripción del producto</h1>
                             <p className="text-gray-800">{description.plain_text}</p>
                         </div>
                     }
