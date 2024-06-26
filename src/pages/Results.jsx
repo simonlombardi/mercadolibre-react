@@ -57,7 +57,7 @@ function Results() {
             <div id='top' className='flex justify-center'>
                 <NavBar />
             </div>
-            <div className={'flex flex-col items-center bg-[#EDEDED]'}>
+            <div className='flex pt-2.5 flex-col items-center bg-[#EDEDED]'>
                 <h1 >Resultados de búsqueda para "{terminoBusqueda}".</h1>
                 {data?.results.length > 0 ? <>
                     <p className='font-bold'>Filtros</p>
